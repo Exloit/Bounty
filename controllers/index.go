@@ -11,13 +11,11 @@ import (
 //	User   models.User
 //}
 
-type MainController struct {
+type IndexController struct {
 	beego.Controller
 }
 
-type SubController struct {
-	beego.Controller
-}
+
 
 //func (c *BaseController) Prepare(){
 //	c.IsLogin = false
@@ -30,15 +28,11 @@ type SubController struct {
 //	}
 //}
 
-func (c *MainController) Get() {
+func (c *IndexController) Get() {
 	c.Data["Website"] = "nibaba"
 	c.Data["Email"] = "lufeng@gmail.com"
 	c.Data["Username"] = "lufeng"
 	c.TplName = "index.html"
 }
 
-// 执行子域名扫描任务和展示
-func (c *SubController) get() {
-
-}
 
