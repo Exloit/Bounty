@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+{{ template  "header.html"}}
+
+<link rel="stylesheet" href="/static/css/login.css">
+<body>
+<form id="slick-login" action="/login" method="post">
+    <img id="logo" src="/static/images/logo.png">
+    <input type="text" name="username" id="name" class="placeholder" placeholder="USERNAME">
+    <input type="password" name="password" id="pass" class="placeholder" placeholder="PASSWORD">
+    <input type="submit" id="submit" value="Login In">
+</form>
+</body>
+</html>
