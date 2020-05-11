@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html class=" ">
+{{ template  "header.html"}}
+
+<body class="">
+{{ template "left.html"}}
+<main>
+    {{ template  "banner.html" .}}
+    <div class="container-fluid">
+        <h1 class="bread-crumb">
+            <strong>
+                安全监测 / 子域名扫描
+            </strong>
+        </h1>
+        <form class="form-horizontal" action="/subdomains" method="POST" data-action="notpjax">
+            <div class="form-group form-group-sm">
+                <label class="col-xs-2 control-label">
+                    目标地址
+                </label>
+                <div class="col-xs-8">
+          <textarea id="domain" name="domain" class="form-control" rows="6" placeholder="http://www.google.com
+不支持多行输入" ></textarea>
+                </div>
+            </div>
+            <div class="form-group form-group-sm">
+                <div class="col-xs-offset-2 col-xs-8">
+                    <button type="button" onclick="add_task()" name="submit" value="add_task" class="btn btn-sm">
+                        启动扫描
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+<script>
+    function add_task() {
+        var domains = document.getElementById('domain').value;
+        if (domains != null){
+            $.post('/subdomains', {
+                "domains": domains
+            },
+                function (status) {
+                    if (status.status == 200){
+                        alert("添加成功")
+                    }
+                }
+            )
+        }
+        // var scan_domain = (domains.replace(/\n/g, ","));
+        // var mode = document.getElementById('scan-mode').value;
+        // var poc_name = document.getElementById('poc_name').value;
+        // var cookie = document.getElementById('scan_cookie').value;
+        // var ua = document.getElementById('scan_ua').value;
+
+        // if(mode == 0) {
+        //     $.post('/scan/', {
+        //             'domains': scan_domain,
+        //             'poc_name': poc_name,
+        //             'mode': mode,
+        //             'csrfmiddlewaretoken': '123412341234'
+        //         },
+        //         function(status) {
+        //             if (status.status == 200) {
+        //                 alert('添加成功');
+        //             }
+        //             if (status.status == 1) {
+        //                 alert('目标都已有扫描结果或正在扫描');
+        //             }
+        //         });
+        // }else{
+        //     $.post('/scan/', {
+        //             'domains': scan_domain,
+        //             'poc_name': poc_name,
+        //             'cookie': cookie,
+        //             'ua': ua,
+        //             'mode': mode,
+        //             'csrfmiddlewaretoken': '1221341234'
+        //         },
+        //         function(status) {
+        //             if (status.status == 200) {alert('添加成功');
+        //             }
+        //         });
+        // }
+    }
+</script>
+
+</html>
