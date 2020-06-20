@@ -10,6 +10,7 @@ import (
 
 type JSONStruct struct{
 	Code int
+	Success bool
 	Msg string
 }
 
@@ -29,7 +30,7 @@ func (c *LoginController) Post() {
 	err := o.QueryTable("user").Filter("Name", name).Filter("Password", password).One(&user)
 	if err != nil {
 		fmt.Println("登录出错")
-		c.Data["json"] = JSONStruct{200,"login failed"}
+		c.Data["json"] = JSONStruct{200, true,"login failed"}
 		c.ServeJSON()
 	}else {
 		fmt.Println(name)

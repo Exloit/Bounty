@@ -28,10 +28,10 @@ func (c *RegisterControllers) Post(){
 		user.Password = password
 		_, err := o.Insert(&user)
 		if err != nil {
-			c.Data["json"] = &JSONStruct{200, "register error"}
+			c.Data["json"] = &JSONStruct{200, true ,"register error"}
 			c.ServeJSON()
 		}
-		c.Data["json"] = &JSONStruct{200, "register success"}
+		c.Data["json"] = &JSONStruct{200, true,"register success"}
 		c.ServeJSON()
 	}
 }
