@@ -35,13 +35,12 @@
 <script>
     function add_task() {
         var ip = document.getElementById('ip').value;
-
         $.ajax({
             url: "/masscan",
             type: "post",
             cache: false,
             dataType: 'json',
-            data: {ip: ip},
+            data: {ip:ip},
             success: function (result) {
                 if (result.success){
                     alert("成功");

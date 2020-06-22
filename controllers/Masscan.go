@@ -7,8 +7,9 @@ package controllers
 
 import (
     "github.com/astaxie/beego"
-    "encoding/json"
+    //"encoding/json"
     "fmt"
+    "github.com/dean2021/go-masscan"
 )
 
 type MasscanController struct {
@@ -26,12 +27,14 @@ func (c *MasscanController) Get(){
 
 // 新增一个masscan扫描
 func (c *MasscanController) Post(){
-    var ip Ip
-    data := c.Ctx.Input.RequestBody
-    err := json.Unmarshal(data, &ip)
-    if err != nil {
-        fmt.Println("json.Unmarshal is err:", err.Error())
-    }
+    //var ip Ip
+    ip := c.GetString("ip")
+    fmt.Println(ip)
+    //err := json.Unmarshal(data, &ip)
+    //if err != nil {
+    //    fmt.Println("json.Unmarshal is err:", err.Error())
+    //}
+    go StartMasscan(ip)
     resp := &JSONStruct{200 , true, "get ip" }
     c.Data["json"] = &resp
     c.ServeJSON()
@@ -39,5 +42,34 @@ func (c *MasscanController) Post(){
 
 // 删除一个masscan扫描
 func (c *MasscanController) Delete(){
+
+}
+
+func StartMasscan(ip string){
+    fmt.Println(ip)
+    m := masscan.New()
+
+    m.SetPorts("0-4000")
+
+    m.SetRanges(ip)
+
+    m.SetRate("300")
+
+    err := m.Run()
+
+    if err != nil {
+        fmt.Println("scanner failed", err)
+        return
+    }
+
+    results, err := m.Parse()
+    if err != nil {
+        fmt.Println("Parse scanner result:", err)
+        return
+    }
+
+    for _, result := range results {
+        fmt.Println(result)
+    }
 
 }

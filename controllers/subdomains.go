@@ -4,13 +4,11 @@ import (
 	"fmt"
 	"github.com/astaxie/beego"
 	"time"
-	"os/exec"
-	"github.com/johnnadratowski/golang-neo4j-bolt-driver/log"
 	"math/rand"
-	"github.com/OWASP/Amass/config"
-	"github.com/OWASP/Amass/systems"
-	"github.com/OWASP/Amass/datasrcs"
-	"github.com/OWASP/Amass/enum"
+	"github.com/OWASP/Amass/v3/config"
+	"github.com/OWASP/Amass/v3/systems"
+	"github.com/OWASP/Amass/v3/datasrcs"
+	"github.com/OWASP/Amass/v3/enum"
 )
 
 
@@ -31,14 +29,6 @@ func (c *SubController) Post(){
 }
 
 func StartSubDomainsScan(target string){
-	time.Sleep(1000)
-	//args := "-d " + target
-	//cmd := exec.Command("amass", args)
-	//err := cmd.Start()
-	//if err != nil {
-	//	fmt.Println(err)
-	//}
-	//err = cmd.Wait()
 
 	rand.Seed(time.Now().UTC().UnixNano())
 
