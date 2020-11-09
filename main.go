@@ -12,7 +12,7 @@ const Dsn = "root:root123456@tcp(127.0.0.1:3306)/bounty?charset=utf8mb4&parseTim
 func main() {
 	//defer db
 	if err := model.Db.AutoMigrate(&model.Users{}); err != nil {
-		fmt.Println(err.Error())
+		CheckErr(err)
 	}
 	router := gin.Default()
 	//router.GET("/user", controllers.UserQuery)
